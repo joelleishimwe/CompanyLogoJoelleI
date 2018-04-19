@@ -45,13 +45,13 @@ local musicChannel
 -- LOCAL FUNCTIONS
 --------------------------------------------------------------------------------------------
 
--- The function that moves the logo across the screen
+-- The function that moves logo (spin, grow, fade)
 local function moveLogo()
 
 	-- rotate the logo 40 degrees again and again
 	logo:rotate(2)
 
-    -- add the scroll speed to the x-value of the logo
+    -- add the scroll speed to the y-value of the logo
 	logo.y = logo.y - scrollSpeed
 
 	-- change the transparency of the logo everytime it moves so that it fades out 
@@ -71,14 +71,8 @@ local function moveLogo()
 
 
 
-
-
-
-
-
-
-	
 end
+
 
 -- The function that will go to the main menu 
 --local function gotoMainMenu()
