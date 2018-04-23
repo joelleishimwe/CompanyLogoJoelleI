@@ -38,7 +38,8 @@ local musicChannel
  
 -- The local variable for this scene
 local logo
-local scrollSpeed = 3
+local scrollSpeed = 7
+local scrollSpeed2 = 2
 local musicChannel
 
 --------------------------------------------------------------------------------------------
@@ -49,35 +50,39 @@ local musicChannel
 local function moveLogo()
 
 	-- rotate the logo 40 degrees again and again
-	logo:rotate(2)
+	logo:rotate(8)
 
     -- add the scroll speed to the y-value of the logo
 	logo.y = logo.y - scrollSpeed
 
 	-- change the transparency of the logo everytime it moves so that it fades out 
-	logo.alpha = logo.alpha - 0.001
+	logo.alpha = logo.alpha - 0.007
 
-	-- make the logo grow 
-	logo.width = logo.width + scrollSpeed
-	logo.height = logo.height + scrollSpeed
-
-	-- make the logo stop moving once at a certain size
-
-
-
-
-
-
-
-
+    -- make the logo switch direction once at a point
+     if (logo.y > 900) or (logo.y < 155) then
+        -- change the sign of the scroll speed
+        logo.y = logo.y + scrollSpeed
+        logo.x = logo.x - scrollSpeed
+     end
 
 end
 
 
+-- The function makes the logo grow
+local function growLogo()
+
+    -- make the logo grow 
+    logo.width = logo.width + scrollSpeed2
+    logo.height = logo.height + scrollSpeed2
+
+end
+
+
+
 -- The function that will go to the main menu 
---local function gotoMainMenu()
+local function gotoMainMenu()
     --composer.gotoScene( "main_menu" )
---end
+end
 
 
 -----------------------------------------------------------------------------------------
@@ -128,6 +133,9 @@ function scene:show( event )
 
         -- Call the moveLogo function as soon as we enter the frame.
         Runtime:addEventListener("enterFrame", moveLogo)
+
+        -- Call the growLogo function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", growLogo)
 
          --Go to the main menu screen after the given time.
         timer.performWithDelay ( 3000, gotoMainMenu)          
